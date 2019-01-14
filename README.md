@@ -1,2 +1,2 @@
-# CyberSecurity_Lessons
+# CyberSecurity_Apps
 Cryptography, Penetration testing, Web etc.

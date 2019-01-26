@@ -1,1 +1,1 @@
-With love from Jeffrey
+Talk is cheap. Show me the code . --| Linus Torvalds |

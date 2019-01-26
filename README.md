@@ -1,1 +1,1 @@
-Portfolio with my apps
+My interesting projects

@@ -1,0 +1,3 @@
+def cipher
+def un...
+def generate

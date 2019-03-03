@@ -1,3 +1,4 @@
+
 class big_des(object):
     def __init__(self, key_, round_amount_):
         self.temp = 0
@@ -14,7 +15,6 @@ class big_des(object):
         while i < self.round_amount:
             self.Round(self.round_key[i])
             i = i + 1
-            #print('\t', self.temp)
         self.ChangeLeftRight()
 
         self.PblockEnd()
@@ -30,7 +30,6 @@ class big_des(object):
         while i < self.round_amount:
             self.Round(self.round_key[self.round_amount - i - 1])
             i = i + 1
-            #print('\t', self.temp)
         self.ChangeLeftRight()
 
         self.PblockEnd()
@@ -446,123 +445,125 @@ class big_des(object):
 
         return key_list
 
-    def Enc_file(self, file_path, file_path_enc):
-        f1 = open(file_path, 'rb')
-        f2 = open(file_path_enc, 'wb')
-        while 1:
-            temp = f1.read(8)
-            if not temp:
-                break
-            temp = temp if len(temp) == 8 else (temp + b'        ')[0:8:1]
-            temp_number = int.from_bytes(temp, 'big')
-            temp_number = self.Enc(temp_number)
-            temp = temp_number.to_bytes(8, byteorder='big')
-            f2.write(temp)
-        f1.close()
-        f2.close()
+    #Enc/Dec files
+    def Enc_file(self, file_path, file_path_enc, IV=5, k=8, flag = 'ECB'):
 
-    def Dec_file(self, file_path_enc, file_path_dec):
-        f1 = open(file_path_enc, 'rb')
-        f2 = open(file_path_dec, 'wb')
-        while 1:
-            temp = f1.read(8)
-            if not temp:
-                break
-            temp = temp if len(temp) == 8 else (temp + b'        ')[0:8:1]
-            temp_number = int.from_bytes(temp, 'big')
-            temp_number = self.Dec(temp_number)
-            temp = temp_number.to_bytes(8, byteorder='big')
-            f2.write(temp)
-        f1.close()
-        f2.close()
+        def ECB(file_path, file_path_enc):
+            f1 = open(file_path, 'rb')
+            f2 = open(file_path_enc, 'wb')
+            while 1:
+                temp = f1.read(8)
+                if not temp:
+                    break
+                temp = temp if len(temp) == 8 else (temp + b'        ')[0:8:1]
+                temp_number = int.from_bytes(temp, 'big')
+                temp_number = self.Enc(temp_number)
+                temp = temp_number.to_bytes(8, byteorder='big')
+                f2.write(temp)
+            f1.close()
+            f2.close()
 
-    def cipher_blocks(self, file_path, file_path_enc):
+        def CBC(file_path, file_path_enc, IV):
+            f1 = open(file_path, 'rb')
+            f2 = open(file_path_enc, 'wb')
 
-        IV = 5
+            C = IV
+            while 1:
+                temp = f1.read(8)
+                if not temp:
+                    break
+                temp = temp if len(temp) == 8 else (temp + b'        ')[0:8:1]
+                temp_number = int.from_bytes(temp, 'big')
+                C = C ^ temp_number
+                C = self.Enc(C)
+                f2.write(C.to_bytes(8, byteorder='big'))
+            f1.close()
+            f2.close()
 
-        f1 = open(file_path, 'rb')
-        f2 = open(file_path_enc, 'wb')
+        def CFB(file_path, file_path_enc, IV, k):
+            f1 = open(file_path, 'rb')
+            f2 = open(file_path_enc, 'wb')
 
-        temp = f1.read(64)
-        temp_number = int.from_bytes(temp, 'big')
-        temp_number = temp_number ^ IV
-        C = self.Enc(temp_number)
-        while 1:
-            temp = f1.read(64)
-            if not temp:
-                break
-            temp_number = int.from_bytes(temp, 'big')
-            C = C ^ temp_number
-            C = self.Enc(C)
-            f2.write(C.to_bytes(64, byteorder='big'))
-        f1.close()
-        f2.close()
+            C = self.Enc(IV)
+            while 1:
+                temp = f1.read(k)
+                if not temp:
+                    break
+                temp = temp if len(temp) == 8 else (temp + b'        ')[0:8:1]
+                temp_number = int.from_bytes(temp, 'big')
+                temp_number = C ^ temp_number
+                C = self.Enc(C)
+                f2.write(temp_number.to_bytes(k, byteorder='big'))
+            f1.close()
+            f2.close()
 
-    def uncipher_blocks(self, file_path_enc, file_path_dec):
+        if flag == 'ECB':
+            ECB(file_path, file_path_enc)
+        elif flag == 'CBC':
+            CBC(file_path, file_path_enc, IV)
+        elif flag == 'CFB':
+            CFB(file_path, file_path_enc, IV, k)
 
-        IV = 5
+    def Dec_file(self, file_path_enc, file_path_dec, IV=5, k=8, flag = 'ECB'):
 
-        f1 = open(file_path_enc, 'rb')
-        f2 = open(file_path_dec, 'wb')
+        def ECB(file_path_enc, file_path_dec):
+            f1 = open(file_path_enc, 'rb')
+            f2 = open(file_path_dec, 'wb')
+            while 1:
+                temp = f1.read(8)
+                if not temp:
+                    break
+                temp = temp if len(temp) == 8 else (temp + b'        ')[0:8:1]
+                temp_number = int.from_bytes(temp, 'big')
+                temp_number = self.Dec(temp_number)
+                temp = temp_number.to_bytes(8, byteorder='big')
+                f2.write(temp)
+            f1.close()
+            f2.close()
 
-        temp = f1.read(64)
-        temp_number = int.from_bytes(temp, 'big')
-        temp_number = temp_number ^ IV
-        C = self.Dec(temp_number)
-        while 1:
-            temp = f1.read(64)
-            if not temp:
-                break
-            temp_number = int.from_bytes(temp, 'big')
-            C = C ^ temp_number
-            C = self.Dec(C)
-            f2.write(C.to_bytes(64, byteorder='big'))
-        f1.close()
-        f2.close()
+        def CBC(file_path_enc, file_path_dec, IV):
+            f1 = open(file_path_enc, 'rb')
+            f2 = open(file_path_dec, 'wb')
 
-    def cipher_feed_back(self, file_path, file_path_enc):
+            C1 = IV
+            C2 = 0
+            while 1:
+                temp = f1.read(8)
+                if not temp:
+                    break
+                temp = temp if len(temp) == 8 else (temp + b'        ')[0:8:1]
+                temp_number = int.from_bytes(temp, 'big')
+                C2 = temp_number
+                temp_number = self.Dec(temp_number)
+                temp_number = temp_number ^ C1
+                C1 = C2
+                f2.write(temp_number.to_bytes(8, byteorder='big'))
+            f1.close()
+            f2.close()
 
-        k = 45
-        IV = 5
+        def CFB(file_path_enc, file_path_dec, IV, k):
+            f1 = open(file_path_enc, 'rb')
+            f2 = open(file_path_dec, 'wb')
 
-        f1 = open(file_path, 'rb')
-        f2 = open(file_path_enc, 'wb')
+            C = self.Enc(IV)
+            while 1:
+                temp = f1.read(k)
+                if not temp:
+                    break
+                temp = temp if len(temp) == 8 else (temp + b'        ')[0:8:1]
+                temp_number = int.from_bytes(temp, 'big')
+                temp_number = C ^ temp_number
+                C = self.Enc(C)
+                f2.write(temp_number.to_bytes(k, byteorder='big'))
+            f1.close()
+            f2.close()
 
-        C = self.Dec(IV)
-
-        while 1:
-            temp = f1.read(k)
-            if not temp:
-                break
-            temp_number = int.from_bytes(temp, 'big')
-            C = C ^ temp_number
-            C = self.Dec(C)
-        f2.write(C.to_bytes(k, byteorder='big'))
-        f1.close()
-        f2.close()
-
-    def uncipher_feed_back(self, file_path_enc, file_path_dec):
-
-        k = 45
-        IV = 5
-
-        f1 = open(file_path_enc, 'rb')
-        f2 = open(file_path_dec, 'wb')
-
-        C = self.Dec(IV)
-
-        while 1:
-            temp = f1.read(k)
-            if not temp:
-                break
-            temp_number = int.from_bytes(temp, 'big')
-            C = C ^ temp_number
-            C = self.Dec(C)
-        f2.write(C.to_bytes(k, byteorder='big'))
-        f1.close()
-        f2.close()
-
-
+        if flag == 'ECB':
+            ECB(file_path_enc, file_path_dec)
+        elif flag == 'CBC':
+            CBC(file_path_enc, file_path_dec, IV)
+        elif flag == 'CFB':
+            CFB(file_path_enc, file_path_dec, IV, k)
 
 
 a = 0x123456ABCD132536
@@ -572,19 +573,7 @@ round_amount = 16
 DES = big_des(key_=key, round_amount_=round_amount)
 
 
-'''
-b = DES.Enc(a)
-print(f'b = {b}')
-c = DES.Dec(b)
-print(f'c = {c}')
 
-d = DES.Enc_file('enc.txt', 'dec.txt')
-e = DES.Dec_file('dec.txt', 'new.txt')
 
-g = DES.cipher_blocks('enc.txt', 'dec.txt')
-h = DES.uncipher_blocks('dec.txt', 'new.txt')
-'''
-'''
-j = DES.cipher_feed_back('enc.txt', 'dec.txt')
-h = DES.uncipher_feed_back('dec.txt', 'new.txt')
-'''
+r = DES.Enc_file('enc.txt', 'dec.txt')
+f = DES.Dec_file('dec.txt', 'new.txt')

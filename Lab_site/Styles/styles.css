@@ -1,0 +1,417 @@
+html,body{
+  overflow-x:hidden;
+}
+
+
+body {
+background-color: floralwhite;
+}
+
+@media (min-width: 768px){
+#navbarCollapse{
+    padding-left: 60vh;
+    }
+}
+    
+.header {
+  padding-bottom: 10rem 1.5rem;
+  padding-top: 10rem;
+  text-align: center;
+  
+  background-color: #475759;
+  display: block;
+  height: 100vh;
+  color: beige;
+}
+
+@media (max-width: 768px){
+    #logo{
+        width: 90%;
+        padding-bottom: 2rem;
+    }
+}
+
+@media (min-width: 768px){
+    #logo{
+    padding-bottom: 2rem;
+    width: 50%;
+    }
+}
+
+.btn{
+    color:black;
+    background-color:blanchedalmond;
+    position: relative;
+}
+
+.btn:visited{
+    color:black;
+    background-color:blanchedalmond;
+    position: relative;
+}
+
+.btn:hover{
+    background-color:aquamarine;
+}
+
+
+.lead{
+    font-size: 30px;
+}
+
+/*Main styles*/
+@media (min-width: 768px){
+.container{
+    margin-top: 4rem;
+    align-content: center;
+    max-width: 70%;
+}
+}
+
+@media (max-width: 768px){
+    .container{
+        margin-top: 4rem;
+        align-content: center;
+        max-width: 100%;
+    }
+}
+
+.about{
+/*    text-align: center;*/
+    padding-bottom: 2rem;
+}
+
+.about_header{
+    font-size: 48px;
+    font-family: Lato;
+    color: #0078FF;
+    font-weight: 400;
+    padding-top: 3rem;
+    text-align: center;
+}
+
+.about_text{
+    font-size: 14px;
+    font-family: Lato;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.about_list{
+    text-align: left;
+    font-size: 14px;
+    font-family: Lato;
+}
+p.about_text > a {
+    text-decoration: none;
+    font-family: Lato;
+}
+
+.gallery{
+    text-align: center;
+}
+
+.sign1 {
+    width: 11rem;
+    margin-left: 1rem;
+    text-align: center;
+/*    border: 1px solid #333;*/
+/*    background: #f0f0f0;*/
+    padding-left: 7px;
+    padding-right: 7px;
+    display: inline-block;
+    font-family: Lato;
+}
+
+.sign2 {
+    width: 11rem;
+    text-align: center;
+/*    border: 1px solid #333;*/
+/*    background: #f0f0f0;*/
+    padding-left: 7px;
+    padding-right: 7px;
+    display: inline-block;
+    font-family: Lato;
+}
+
+@media (max-width: 768px){
+    .sign1{
+        margin-left: 0rem;
+        width: 10rem;
+        
+    }
+    .sign2{
+        width: 10rem;
+    }
+    
+    .sign1 > figcaption{
+        font-size: 12px;
+    }
+    
+    .sign2 > figcaption{
+        font-size: 12px;
+    }
+}
+
+#photo1{
+    border-bottom: 5px;
+}
+
+#NAU_Cybersecurity_wallpaper{
+    width: 50rem;
+}
+
+@media (max-width: 768px){
+    #NAU_Cybersecurity_wallpaper{
+        width: 18rem;
+    }
+}
+
+.projects{
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.projects_header{
+    font-size: 48px;
+    font-family: Lato;
+    color: #0078FF;
+    font-weight: 400;
+    padding-top: 3rem;
+    text-align: center;
+}
+
+.projects_text{
+    font-size: 14px;
+    font-family: Lato;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: justify;
+}
+
+#Facultu_logo{
+    width: 26rem;
+    height: 16rem;
+}
+
+@media (max-width: 768px){
+    #Facultu_logo{
+        width: 18rem;
+        height: 11rem;
+    }
+}
+
+.training{
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.training_header{
+    text-align: center;
+    font-size: 48px;
+    font-family: Lato;
+    color: #0078FF;
+    font-weight: 400;
+    padding-top: 3rem;
+}
+
+.training_text{
+    font-size: 14px;
+    font-family: Lato;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+#Training_center_class{
+    width: 35rem;
+}
+
+@media (max-width: 768px){
+    #Training_center_class{
+        width: 18rem;
+    }
+}
+
+.events{
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.events_header{
+    text-align: center;
+    font-size: 48px;
+    font-family: Lato;
+    color: #0078FF;
+    font-weight: 400;
+    padding-top: 3rem;
+}
+
+/*
+.events_text{
+    font-size: 14px;
+    font-family: Lato;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: left;
+}
+*/
+
+/*
+p.events_text > a{
+    text-decoration: none;
+    font-family: Lato;
+}
+*/
+
+.events_list{
+    font-size: 14px;
+    font-family: Lato;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: left;
+}
+
+#Conference{
+    width: 37rem;
+}
+
+@media (max-width: 768px){
+    #Conference{
+        width: 20rem;
+}
+    
+}
+
+.partners{
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.partners_header{
+    text-align: center;
+    font-size: 48px;
+    font-family: Lato;
+    color: #0078FF;
+    font-weight: 400;
+    padding-top: 3rem;
+}
+
+.partners_table{
+    text-align: center;
+    margin: auto; 
+    width: 50rem; 
+    font-family: Lato;
+    font-size: 14px;
+}
+
+
+.partners > tr, td{
+/*    border: 1px solid black;*/
+    }
+
+
+#partners_desription{
+    text-align: left;
+    margin-left: 0.3rem;
+    font-family: Lato;
+    font-size: 14px;
+}
+
+/*Partners IMGs*/
+#UITL{
+    width: 20rem; 
+    height: 10rem;
+}
+#Cipher{
+    width: 18rem;
+}
+#SCSA{
+    width: 15rem;
+}
+/*End of Partners IMGs*/
+
+@media (max-width: 768px){
+    .partners_table{
+        width: 1rem;
+        font-family: Lato;
+        font-size: 14px;
+    }
+    .partners_table  tr, td{
+        display: block;
+        border: 0;
+    }
+}
+
+
+.contacts{
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.contacts_header{
+    font-size: 48px;
+    font-family: Lato;
+    color: #0078FF;
+    font-weight: 400;
+    padding-top: 3rem;
+    text-align: center;
+}
+
+#contacts_table{
+    border: 1px solid black;
+    margin: auto;
+    text-align: center;
+    font-family: Lato;
+    font-size: 14px;
+}
+
+#address_logo{
+    width: 8rem;
+    padding: 1.5rem;
+}
+
+#phone_logo{
+    width: 8rem;
+    padding: 1.2rem;
+}
+
+#mail_logo{
+    width: 6rem;
+}
+#facebook_logo{
+    width: 5.2rem;
+    padding: 0.2rem;
+}
+
+#contacts_celltext{
+    padding: 1rem;
+}
+
+@media (max-width: 768px){
+    #contacts_table{
+        border: 0;
+        font-family: Lato;
+        font-size: 14px;
+    } 
+}
+
+#Intro_to_lab{
+    padding-top: 1rem;
+    width: 35rem;
+}
+
+@media (max-width: 768px){
+    #Intro_to_lab{
+        width: 18rem;
+    }
+}
+
+/*footer*/
+
+/*
+#footer{
+    font-size: 14px;
+    font-family: Lato;
+
+    height: 5rem;
+    background-color:cornsilk;
+}*/
